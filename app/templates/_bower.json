@@ -1,0 +1,14 @@
+{
+  "name": "<%= appname %>",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation-apps": "1.*"
+  }
+}
