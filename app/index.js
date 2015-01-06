@@ -7,8 +7,9 @@ var yosay = require('yosay');
 var ReactFoundationAppsGenerator = yeoman.generators.Base.extend({
   initializing: function () {
     this.pkg = require('../package.json');
+    this.argument('appname', { type: String, required: false });
+    this.appname = this.appname || path.basename(process.cwd());
   },
-
   prompting: function () {
     var done = this.async();
 
@@ -17,13 +18,22 @@ var ReactFoundationAppsGenerator = yeoman.generators.Base.extend({
       'Welcome to the React Foundation Apps generator!'
     ));
 
-    var prompts = [];
+    var prompts = []
+    
+    prompts = [];
 
     this.prompt(prompts, function (props) {
       done();
     }.bind(this));
   },
-
+  configuring: {
+    enforceFolderName: function () {
+      // Move to folder with name this.appname
+      if (this.appname !== this._.last(this.destinationRoot().split(path.sep))) {
+        this.destinationRoot(this.appname);
+      }
+    },
+  },
   writing: {
     app: function () {
       this.dest.mkdir('client');
